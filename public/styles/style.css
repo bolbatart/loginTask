@@ -36,7 +36,7 @@
 
 .login-page > .container > .row > .login-form > .content {
   width: 100%;
-  height: 238px;
+  min-height: 238px;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   background-color: #f2f2f2;
@@ -53,30 +53,34 @@
 
 .login-form {
   padding: 22px 24px 34px 21px;
+  min-height: 238px;
 }
 
 .login-form .form-group {
+  height: 69px;
+}
+
+.login-form .form-group .form-input-container {
   width: 100%;
   height: 51px;
-  margin-bottom: 18px;
   border-radius: 3px;
   background-color: #f0eef0;
   border: 1px solid rgba(220, 220, 220, 0.86);
   position: relative;
 }
 
-.login-form .form-group > i {
+.login-form .form-input-container > i {
   position: absolute;
   top: 16px;
   right: 15px;
 }
 
-.login-form .form-group input:focus {
+.login-form .form-input-container input:focus {
   border-color: #734e76;
   box-shadow: 0 0 5px 1px #734e76;
 }
 
-.login-form .form-group input:focus + i {
+.login-form .form-input-container input:focus + i {
   color: #734e76;
 }
 
@@ -113,4 +117,15 @@
   width: 16px;
   height: 17px;
   color: #b0b0b0;
+}
+
+.form-error {
+  font-size: 10px;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  color: #d80000;
+}
+
+.login-form .error-input {
+  border-color: red;
+  box-shadow: 0 0 5px 1px red;
 }
