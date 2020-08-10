@@ -1,0 +1,69 @@
+import React from 'react';
+
+/**
+ * TODO
+ * [] validate function
+ * [] fake api call
+ * [] save credentials to the local storage
+ * [] create greeting page
+ * [] create routes
+ * [] connect redux
+ * [] create error output to the UI
+ * [] html and scss
+ */
+export default function Login() {
+  function validate() {
+    // email and pass validation
+  }
+
+  function submit() {
+    /**
+     * if(validation(email, pass) {
+     *    make a fake api call
+     *      .then(res => {
+     *        save to the local storage and redirect to the greeting page
+     *       })
+     *      .catch(err => {
+     *         throw an error
+     *       })
+     *  } else {
+     *    throw an error
+     * }
+     */
+  }
+
+  return (
+    <div className="login">
+      <div className="container">
+        <div className="row">
+          <div className="col-4 my-auto">
+            <div className="header">
+              <p>Login Form</p>
+            </div>
+
+            <div className="content">
+              <div className="form">
+                <div className="form-group">
+                  <input type="text" name="username" placeholder="username" />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="footer">
+              <button type="button" className="btn">
+                Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
