@@ -23,7 +23,7 @@ export default function CongratuliationsModal(props) {
           delete this token click the Log Out button.
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={logout}>
+          <Button color="primary" className="logout-btn" onClick={logout}>
             Log Out
           </Button>
         </ModalFooter>

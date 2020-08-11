@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -8,16 +8,28 @@ import {
   changePasswordErr,
 } from '../store/actions/signInAction';
 import CongratulationsModal from './CongratulationsModal';
+import { useHistory } from 'react-router-dom';
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const username = useSelector((state) => state.signInReducer.username);
   const password = useSelector((state) => state.signInReducer.password);
   const usernameErr = useSelector((state) => state.signInReducer.usernameErr);
   const passwordErr = useSelector((state) => state.signInReducer.passwordErr);
 
   const [showModal, setShowModal] = useState(localStorage.getItem('jwt-token'));
+  const [wrongCredentialsErr, setWrongCredentialsErr] = useState('');
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/')
+      .then((res) => {})
+      .catch((err) => {
+        history.push('/internal-server-error');
+      });
+  }, []);
 
   function handleUsernameChange(usr) {
     dispatch(changeUsername(usr));
@@ -30,6 +42,7 @@ export default function LoginForm() {
 
   function handlePasswordChange(pass) {
     dispatch(changePassword(pass));
+    setWrongCredentialsErr('');
 
     let err = 'Password must be at least 4 characters long';
     if (pass.length < 4) dispatch(changePasswordErr(err));
@@ -48,7 +61,11 @@ export default function LoginForm() {
             setShowModal(true);
           }
         })
-        .catch((err) => {});
+        .catch((err) => {
+          if (err.response.status) {
+            setWrongCredentialsErr('Wrong email or password');
+          }
+        });
     }
   }
 
@@ -96,7 +113,7 @@ export default function LoginForm() {
                     />
                     <i className="password-icon fa fa-lock"></i>
                   </div>
-                  <span>{passwordErr}</span>
+                  <span>{passwordErr ? passwordErr : wrongCredentialsErr}</span>
                 </div>
                 <input className="signin-btn" type="submit" value="Sign In" />
               </form>
