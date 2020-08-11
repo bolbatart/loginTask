@@ -1,10 +1,11 @@
 import React from 'react';
-import LoginPage from './views/LoginPage';
+import Login from './views/Login';
+import './styles.scss';
 
 function App() {
   return (
     <div className="App">
-      <LoginPage />
+      <Login />
     </div>
   );
 }

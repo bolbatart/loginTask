@@ -7,9 +7,9 @@ import {
   changeUsernameErr,
   changePasswordErr,
 } from '../store/actions/signInAction';
-import GreetingModal from '../components/GreetingModal';
+import CongratulationsModal from './CongratulationsModal';
 
-export default function LoginPage() {
+export default function LoginForm() {
   const username = useSelector((state) => state.signInReducer.username);
   const password = useSelector((state) => state.signInReducer.password);
   const usernameErr = useSelector((state) => state.signInReducer.usernameErr);
@@ -48,37 +48,30 @@ export default function LoginPage() {
             setShowModal(true);
           }
         })
-        .catch((err) => {
-          console.log(err.message);
-        });
+        .catch((err) => {});
     }
   }
 
   return (
-    <div className="login-page">
+    <div className="login-form">
       <div className="container">
-        <div className="row align-items-center justify-content-center">
-          {/* form */}
-          <div className="login-form col-lg-7 col-md-9">
-            <GreetingModal isOpen={showModal} />
-            {/* header */}
-            <div className="header">
-              <p className="login-header-text">Login Form</p>
+        <div className="row">
+          <div className="col col-12">
+            <CongratulationsModal isOpen={showModal} />
+            <div className="login-header">
+              <span>Login Form</span>
             </div>
-            {/* header */}
-            {/* content */}
-            <div className="content">
-              <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+            <div className="login-content">
+              <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="form-group">
                   <div
                     className={
-                      'form-input-container' +
-                      (usernameErr ? ' error-input' : '')
+                      'form-group-input' +
+                      (usernameErr ? ' form-group-err' : '')
                     }
                   >
                     <input
                       type="text"
-                      className="login-input"
                       placeholder="Username"
                       name="username"
                       value={username}
@@ -86,35 +79,29 @@ export default function LoginPage() {
                     />
                     <i className="username-icon fa fa-user" />
                   </div>
-                  <span className="form-error">{usernameErr}</span>
+                  <span>{usernameErr}</span>
                 </div>
                 <div className="form-group">
                   <div
                     className={
-                      'form-input-container' +
-                      (passwordErr ? ' error-input' : '')
+                      'form-group-input' +
+                      (passwordErr ? ' form-group-err' : '')
                     }
                   >
                     <input
                       type="password"
-                      name="password"
-                      className="login-input"
                       placeholder="Password"
                       value={password}
                       onChange={(e) => handlePasswordChange(e.target.value)}
                     />
                     <i className="password-icon fa fa-lock"></i>
                   </div>
-                  <span className="form-error">{passwordErr}</span>
+                  <span>{passwordErr}</span>
                 </div>
-
-                <input type="submit" value="Sign In" className="signin-btn" />
-                {/* </div> */}
+                <input className="signin-btn" type="submit" value="Sign In" />
               </form>
             </div>
-            {/* content */}
           </div>
-          {/* form */}
         </div>
       </div>
     </div>

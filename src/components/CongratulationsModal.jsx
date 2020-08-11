@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useDispatch } from 'react-redux';
 import { setToInitial } from '../store/actions/signInAction';
 
-export default function GreetingModal(props) {
+export default function CongratuliationsModal(props) {
   const { isOpen } = props;
   const dispatch = useDispatch();
 
