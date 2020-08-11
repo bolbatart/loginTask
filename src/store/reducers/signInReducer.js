@@ -15,6 +15,8 @@ const signInReducer = (state = initialState, action) => {
       return { ...state, usernameErr: action.value };
     case 'CHANGE_PASSWORD_ERROR':
       return { ...state, passwordErr: action.value };
+    case 'SET_TO_INITIAL':
+      return initialState;
     default:
       return state;
   }

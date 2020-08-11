@@ -25,3 +25,9 @@ export const changePasswordErr = (value) => {
     value,
   };
 };
+
+export const setToInitial = () => {
+  return {
+    type: 'SET_TO_INITIAL',
+  };
+};

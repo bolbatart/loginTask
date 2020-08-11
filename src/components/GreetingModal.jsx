@@ -1,9 +1,14 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { useDispatch } from 'react-redux';
+import { setToInitial } from '../store/actions/signInAction';
 
 export default function GreetingModal(props) {
   const { isOpen } = props;
+  const dispatch = useDispatch();
+
   function logout() {
+    dispatch(setToInitial());
     localStorage.removeItem('jwt-token');
     window.location.reload(false);
   }
