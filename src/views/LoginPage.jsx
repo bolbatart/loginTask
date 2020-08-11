@@ -1,28 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  changeUsername,
+  changePassword,
+  changeUsernameErr,
+  changePasswordErr,
+} from '../store/actions/signInAction';
 import GreetingModal from '../components/GreetingModal';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [usernameErr, setUsernameErr] = useState('');
-  const [passwordErr, setPasswordErr] = useState('');
+  const username = useSelector((state) => state.signInReducer.username);
+  const password = useSelector((state) => state.signInReducer.password);
+  const usernameErr = useSelector((state) => state.signInReducer.usernameErr);
+  const passwordErr = useSelector((state) => state.signInReducer.passwordErr);
+
   const [showModal, setShowModal] = useState(localStorage.getItem('jwt-token'));
 
+  const dispatch = useDispatch();
+
   function handleUsernameChange(usr) {
-    setUsername(usr);
+    dispatch(changeUsername(usr));
 
     let err = 'Username must be a valid email address';
-    if (!usr.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) setUsernameErr(err);
-    else setUsernameErr('');
+    if (!usr.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i))
+      dispatch(changeUsernameErr(err));
+    else dispatch(changeUsernameErr(''));
   }
 
   function handlePasswordChange(pass) {
-    setPassword(pass);
+    dispatch(changePassword(pass));
 
     let err = 'Password must be at least 4 characters long';
-    if (pass.length < 4) setPasswordErr(err);
-    else setPasswordErr('');
+    if (pass.length < 4) dispatch(changePasswordErr(err));
+    else dispatch(changePasswordErr(''));
   }
 
   function handleSubmit(e) {
