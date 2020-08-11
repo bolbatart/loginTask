@@ -31,6 +31,10 @@ app.use(
 );
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+  return res.send(true);
+});
+
 app.post('/login', (req, res) => {
   if (req.body.username === dbEmail && req.body.password === dbPass) {
     const token = jwt.sign(req.body.username, jwtPass);
